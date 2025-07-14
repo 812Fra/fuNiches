@@ -1,0 +1,84 @@
+---
+title: "Niche Analysis Report for `r params$analysis_results$metadata$target_species_id`"
+output:
+  github_document:
+    toc: true
+    toc_depth: 2
+params:
+  analysis_results: NULL
+  analysis_settings: NULL
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE, fig.align = 'center')
+library(dplyr)
+library(knitr)
+```
+
+# Analysis Overview
+
+This report summarizes the niche analysis for the target species **`r params$analysis_results$metadata$target_species_id`**.
+
+*   **Run Date:** `r format(params$analysis_results$metadata$run_timestamp, "%Y-%m-%d %H:%M:%S")`
+*   **Comparison Species:** `r length(params$analysis_results$metadata$comparison_species_used)` species were used for comparison.
+*   **Variable Selection Method:** `r params$analysis_settings$variable_selection_method`
+
+# Variable Selection
+
+The following variables were selected for the final analyses.
+
+```{r var-selection-table, results='asis'}
+if (!is.null(params$analysis_results$metadata$final_variables_used)) {
+  
+  var_df <- data.frame(
+    Variable = params$analysis_results$metadata$final_variables_used
+  )
+  
+  kable(var_df, caption = "Final variables used in the analysis.")
+  
+} else {
+  
+  cat("No variable selection details were available for this analysis run.")
+  
+}
+```
+
+# Niche Overlap
+
+Niche overlap indices were calculated between the target species and all comparison species. The table below shows the top 10 most similar species based on the `r params$analysis_settings$plot_n_closest_overlap_metric` metric.
+
+```{r overlap-table, results='asis'}
+if (!is.null(params$analysis_results$overlap_indices)) {
+  
+  top_n_overlap <- params$analysis_results$overlap_indices %>%
+    arrange(desc(!!sym(params$analysis_settings$plot_n_closest_overlap_metric))) %>%
+    slice_head(n = 10)
+    
+  kable(top_n_overlap, caption = "Top 10 species with the highest niche overlap.", digits = 3)
+  
+} else {
+  
+  cat("Overlap indices were not calculated in this analysis run.")
+  
+}
+```
+
+# Ecological Niche Factor Analysis (ENFA)
+
+The ENFA plot shows the position of the species' niche (green points) relative to the available environment (origin). The axes represent the main gradients of environmental variation.
+
+*   **Marginality:** `r round(params$analysis_results$enfa$marginality, 3)` (How different the species' mean environment is from the global mean).
+*   **Specialization:** `r round(params$analysis_results$enfa$specialization, 3)` (How narrow the species' niche is compared to the available environment).
+
+```{r enfa-plot, results='asis', fig.cap="ENFA biplot for the target species."}
+if (!is.null(params$analysis_results$enfa$plot)) {
+  
+  print(params$analysis_results$enfa$plot)
+  
+} else {
+  
+  cat("ENFA plot is not available.")
+  
+}
+```
+

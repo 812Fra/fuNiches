@@ -1,0 +1,64 @@
+Package: fuNiches
+Type: Package
+Title: A Framework for Analyzing and Visualizing Ecological Niche Overlap
+Version: 1.0.0
+Authors@R: 
+    person("Francesca", "Angius",
+           email = "0812.francesca@gmail.com",
+           role = c("aut", "cre"))
+Description: Provides a modular and reproducible workflow to quantify, 
+    compare, and visualize the ecological niches of species. It integrates 
+    robust functionalities for variable selection (Boruta), niche modeling 
+    (hypervolume), and multivariate community analysis (vegan) into a 
+    streamlined pipeline.
+License: MIT + file LICENSE
+URL: https://github.com/812Fra/fuNiches
+BugReports: https://github.com/812Fra/fuNiches/issues
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    ade4,
+    adehabitatHS,
+    alphahull,
+    arules,
+    Boruta,
+    car,
+    caret,
+    cluster,
+    corrplot,
+    dendextend,
+    dplyr,
+    factoextra,
+    forcats,
+    fs,
+    ggforce,
+    ggplot2,
+    ggpubr,
+    ggraph,
+    ggrepel,
+    ggridges,
+    graphics,
+    grDevices,
+    hypervolume,
+    igraph,
+    kableExtra,
+    MASS,
+    methods,
+    patchwork,
+    pheatmap,
+    purrr,
+    randomcoloR,
+    randomForest,
+    raster,
+    RColorBrewer,
+    rstatix,
+    sf,
+    stats,
+    stringr,
+    tibble,
+    tidygraph,
+    tidyr,
+    usdm,
+    utils,
+    vegan
+RoxygenNote: 7.3.1
