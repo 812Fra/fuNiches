@@ -18,7 +18,7 @@ fuNiches is a flexible and reproducible R package designed for
 quantifying and comparing ecological niches between fungi, particularly
 ectomycorrhizal (ECM) fungi. Developed to support in-depth ecological
 analyses, fuNiches integrates functionality from fundamental R packages
-such as hypervolume, vegan, Boruta, and the entire tidyverse suite,
+such as hypervolume, vegan, Boruta, and the tidyverse suite,
 offering a comprehensive workflow from data preparation to detailed
 report generation.
 
